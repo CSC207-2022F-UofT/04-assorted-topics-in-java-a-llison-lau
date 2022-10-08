@@ -22,6 +22,22 @@ class DrivableMap {
         drivable_map = new HashMap<>();
     }
 
+    /**
+     * Adds the given pair to drivable_map if the ID string does not appear as a key and return true
+     *
+     * @param id    id
+     * @param object    the object corresponding to the id
+     * @return true if the Drivable was added to drivable_map
+     */
+    public boolean addDrivable(String id, Drivable object){
+        if (this.drivable_map.get(id) == null){
+            this.drivable_map.put(id, object);
+            return true;
+        } else{
+            return false;
+        }
+
+    }
     /* TODO: Write a method named addDrivable that takes a String (the ID)
      *       and a Drivable object. If the ID string does not appear as a key
      *       in drivable_map, then add the pair to drivable_map.
@@ -29,8 +45,20 @@ class DrivableMap {
      */
 
 
-
-
+    /**
+     * Report if there is at least one item in drivable_map that has a maxSpeed greater that or equal to the speed given
+     *
+     * @param speed the speed to be compared to
+     * @return  true iff there is at least one item in drivable_map that has a maxSpeed >= the speed given
+     */
+    public boolean hasFasterThan(int speed){
+        for (Drivable item: this.drivable_map.values()){
+            if (item.getMaxSpeed() >= speed){
+                return true;
+            }
+        }
+        return false;
+    }
     /* TODO: Write a method named hasFasterThan that takes an int (a speed)
      *       and returns true iff there is at least one item in drivable_map
      *       that has a maxSpeed >= the speed given.
@@ -39,9 +67,20 @@ class DrivableMap {
      */
 
 
-
-
-
+    /**
+     * Returns a List containing all of the Tradable items in drivable_map.
+     *
+     * @return a List containing all of the Tradable items in drivable_map.
+     */
+    public List<Tradable> getTradable(){
+        List<Tradable> items = new ArrayList<>();
+        for (String item: this.drivable_map.keySet()){
+            if (this.drivable_map.get(item) instanceof Tradable){
+                items.add((Tradable) this.drivable_map.get(item));
+            }
+        }
+        return items;
+    }
     /* TODO: Write a method named getTradable that takes no arguments and
      *       returns a List containing all of the Tradable items in
      *       drivable_map.
